@@ -24,7 +24,6 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            /* 漂亮的动态背景 */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -39,7 +38,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 主容器：玻璃拟态风格 */
         .main-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -55,7 +53,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* 头部 */
         .card-header {
             background: var(--primary-gradient);
             color: white;
@@ -65,7 +62,6 @@
             overflow: hidden;
         }
 
-        /* 头部装饰圆圈 */
         .card-header::before {
             content: '';
             position: absolute;
@@ -87,7 +83,6 @@
             z-index: 1;
         }
 
-        /* 内容区域 */
         .card-body {
             display: flex;
             flex-wrap: wrap;
@@ -97,7 +92,6 @@
             justify-content: center;
         }
 
-        /* 左侧：计数器 */
         .counter-section {
             flex: 1;
             min-width: 280px;
@@ -119,7 +113,7 @@
         }
 
         #count-display {
-            font-family: 'Poppins', sans-serif; /* 数字专用字体 */
+            font-family: 'Poppins', sans-serif;
             font-size: 5rem;
             font-weight: 800;
             background: var(--primary-gradient);
@@ -131,7 +125,6 @@
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* 按钮组 */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -185,7 +178,6 @@
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
 
-        /* 右侧：图片 */
         .image-section {
             flex: 1;
             min-width: 280px;
@@ -200,8 +192,8 @@
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             transition: transform 0.4s ease;
-            background: #eee; /* 加载前的占位色 */
-            aspect-ratio: 3/2; /* 保持比例 */
+            background: #eee;
+            aspect-ratio: 3/2;
             width: 100%;
             max-width: 500px;
         }
@@ -215,7 +207,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0; /* 初始隐藏，加载完再显示 */
+            opacity: 0;
             transition: opacity 0.6s ease;
         }
 
@@ -234,14 +226,13 @@
             backdrop-filter: blur(4px);
         }
 
-        /* 响应式 */
         @media (max-width: 768px) {
             .card-body {
                 flex-direction: column;
                 padding: 25px;
                 gap: 30px;
             }
-            
+
             .counter-section, .image-section {
                 width: 100%;
             }
@@ -249,7 +240,7 @@
             #count-display {
                 font-size: 4rem;
             }
-            
+
             .card-header h1 {
                 font-size: 1.5rem;
             }
@@ -264,31 +255,27 @@
     </div>
 
     <div class="card-body">
-        
-        <!-- 左侧：计数器 -->
         <div class="counter-section">
             <div class="counter-label">当前计数</div>
             <div id="count-display">0</div>
-            
+
             <div class="btn-group">
                 <button id="click-btn">🚀 点击增加能量</button>
                 <button id="reset-btn">🔄 重置并换图</button>
             </div>
         </div>
 
-        <!-- 右侧：图片 -->
         <div class="image-section">
             <div class="image-wrapper">
                 <img 
-                    src="https://picsum.photos/800/600?random=1" 
-                    alt="随机风景" 
+                    src="images/1.jpg" 
+                    alt="我的图片" 
                     class="network-img"
                     id="gallery-img"
                 >
             </div>
-            <div class="caption">📸 每次重置，邂逅新风景</div>
+            <div class="caption"> 每次重置，邂逅新风景</div>
         </div>
-
     </div>
 </div>
 
@@ -298,7 +285,6 @@
     const resetButton = document.getElementById('reset-btn');
     const galleryImg = document.getElementById('gallery-img');
 
-    // 初始化计数
     let count = parseInt(localStorage.getItem('clickCount')) || 0;
 
     function updateDisplay() {
@@ -306,45 +292,56 @@
         localStorage.setItem('clickCount', count);
     }
 
-    // 点击增加
     clickButton.addEventListener('click', function() {
         count++;
         updateDisplay();
-        
-        // 数字弹跳动画
         displayElement.style.transform = "scale(1.2)";
         setTimeout(() => displayElement.style.transform = "scale(1)", 200);
     });
 
-    // 重置
+    // 自己的本地图片
+    const images = [
+        "images/1.jpg",
+        "images/2.jpg",
+        "images/3.jpg",
+        "images/4.jpg",
+        "images/5.jpg",
+        "images/6.jpg",
+        "images/7.jpg",
+        "images/8.jpg",
+        "images/9.jpg",
+        "images/10.jpg",
+        "images/11.jpg",
+        "images/12.jpg",
+        "images/13.jpg",
+        "images/14.jpg",
+        "images/15.jpg",
+        "images/16.jpg",
+        "images/17.jpg"
+    ];
+
     resetButton.addEventListener('click', function() {
         if(confirm('确定要重置计数并更换一张新图片吗？')) {
             count = 0;
             updateDisplay();
-            
-            // 刷新图片逻辑
-            const timestamp = new Date().getTime();
-            // 先隐藏图片，换好源后再显示，避免看到加载过程
+
+            const randomImg = images[Math.floor(Math.random() * images.length)];
             galleryImg.classList.remove('loaded');
-            
+
             setTimeout(() => {
-                galleryImg.src = `https://picsum.photos/800/600?random=${timestamp}`;
+                galleryImg.src = randomImg;
             }, 100);
         }
     });
 
-    // 图片加载完成事件
     galleryImg.onload = function() {
         this.classList.add('loaded');
     };
 
-    // 页面加载初始化
     updateDisplay();
-    // 确保初始图片也触发 onload
     if(galleryImg.complete) {
         galleryImg.classList.add('loaded');
     }
-
 </script>
 
 </body>
