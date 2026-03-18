@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动计数器 & 灵感画廊</title>
+
+    <!-- 引入字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+    
+    <!-- 引入外部 CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="main-card">
+    <div class="card-header">
+        <h1>✨ 互动计数器 & 灵感画廊</h1>
+    </div>
+
+    <div class="card-body">
+        <div class="counter-section">
+            <div class="counter-label">当前计数</div>
+            <div id="count-display">0</div>
+
+            <div class="btn-group">
+                <button id="click-btn">🚀 点击增加能量</button>
+                <button id="reset-btn">🔄 重置并换图</button>
+            </div>
+        </div>
+
+        <div class="image-section">
+            <div class="image-wrapper">
+                <img 
+                    src="images/1.jpg" 
+                    alt="我的图片" 
+                    class="network-img"
+                    id="gallery-img"
+                >
+            </div>
+            <div class="caption"> 每次重置，邂逅新风景</div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入外部 JS -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
